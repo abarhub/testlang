@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+#include <vector>
+
 using namespace std;
 
 long last = 0;
@@ -10,12 +12,12 @@ int randomNumber(int max)
     return tmp % max;
 }
 
-int *createArray(int len, int maxValue)
+std::vector < int >* createArray(int len, int maxValue)
 {
-    int *p_array = new int[len];
+    std::vector < int > *p_array = new vector<int>();
     for (int i = 0; i < len; i++)
     {
-        p_array[i] = randomNumber(maxValue);
+        p_array->push_back(randomNumber(maxValue));
     }
     return p_array;
 }
@@ -61,24 +63,20 @@ int main(int argc, char *argv[])
              << ";noOutput=" << noOutput << ";debug=" << debug << endl;
     }
 
-    int *arr = createArray(tabSize, maxValue);
-    int n = tabSize / sizeof(arr[0]);
+    std::vector < int > *arr = createArray(tabSize, maxValue);
 
-    /*Here we take two parameters, the beginning of the
-    array and the length n upto which we want the array to
-    be sorted*/
-    sort(arr, arr + n);
+    sort(arr->begin(), arr->end());
 
     if (!noOutput)
     {
-        cout << "\nArray after sorting using "
-                "default sort is : \n";
+        cout << "Array after sorting using "
+                "default sort is : "<<endl;
         int i = 0;
-        for (i = 0; i < n && i < 10; ++i)
-        {
-            cout << arr[i] << " ";
+        for (auto it = arr->cbegin(); it != arr->cend()&&i < 10; ++it,i++){
+            cout << *it << " ";
         }
-        if (i < n)
+        
+        if (i < tabSize)
         {
             cout << "...";
         }

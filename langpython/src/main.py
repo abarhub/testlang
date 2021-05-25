@@ -34,7 +34,7 @@ def main():
             debug = True
 
     if debug:
-        print("lang=c;tabSize=%d;maxValue=%d;noOutput=%d;debug=%d\n" %
+        print("lang=c;tabSize=%d;maxValue=%d;noOutput=%d;debug=%d" %
               (tabSize, maxValue, noOutput, debug))
 
     tab = createArray(tabSize, maxValue)

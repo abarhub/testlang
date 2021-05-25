@@ -1,4 +1,7 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class Main {
@@ -8,15 +11,13 @@ public class Main {
     private static int randomNumber(int max) {
         last = (25214903917l * last + 11l) % 281474976710656l;
         long tmp = (last >= 0) ? last : -last;
-        int tmp2 = (int) tmp;
-        tmp2 = (tmp2 >= 0) ? tmp2 : -tmp2;
-        return tmp2 % max;
+        return (int) (tmp % ((long) max));
     }
 
-    private static int[] createArray(int len, int maxValue) {
-        int p_array[] = new int[len];
+    private static List<Integer> createArray(int len, int maxValue) {
+        List<Integer> p_array = new ArrayList<>(len);
         for (int i = 0; i < len; i++) {
-            p_array[i] = randomNumber(maxValue);
+            p_array.add(randomNumber(maxValue));
         }
         return p_array;
     }
@@ -45,23 +46,22 @@ public class Main {
             for (int i = 0; i < args.length; i++) {
                 System.out.printf("   argv[%d] : '%s'\n", i, args[i]);
             }
-            System.out.printf("lang=c;tabSize=%d;maxValue=%d;noOutput=%b;debug=%b\n",
-             tabSize, maxValue, noOutput,
+            System.out.printf("lang=java;tabSize=%d;maxValue=%d;noOutput=%b;debug=%b\n", tabSize, maxValue, noOutput,
                     debug);
         }
 
         // Our arr contains 8 elements
-        int[] arr = createArray(tabSize, maxValue);
+        List<Integer> arr = createArray(tabSize, maxValue);
 
-        Arrays.sort(arr);
+        Collections.sort(arr);
 
         if (!noOutput) {
             System.out.printf("Modified arr[] : \n");
             int i = 0;
-            for (i = 0; i < arr.length && i < 10; ++i) {
-                System.out.printf("%d ", arr[i]);
+            for (i = 0; i < arr.size() && i < 10; ++i) {
+                System.out.printf("%d ", arr.get(i));
             }
-            if (i < arr.length) {
+            if (i < arr.size()) {
                 System.out.printf("...");
             }
             System.out.printf("\n");

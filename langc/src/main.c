@@ -7,8 +7,10 @@ long last = 0;
 
 int randomNumber(int max)
 {
+    printf("randomNumber(%ld): %ld\n",max,last);
     last = (25214903917l * last + 11l) % 281474976710656l;
     long tmp = (last >= 0) ? last : -last;
+    printf("randomNumber res: %ld\n",tmp % max);
     return tmp % max;
 }
 
@@ -79,7 +81,7 @@ int main(int argc, char *argv[])
     int *x = NULL;
     x = createArray(tabSize, maxValue);
 
-    qsort(x, tabSize / sizeof(*x), sizeof(*x), comp);
+    qsort(x, tabSize, sizeof(int), comp);
 
     if (!noOutput)
     {
