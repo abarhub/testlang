@@ -8,7 +8,7 @@ La description de l'algorithme est [ici](https://en.wikipedia.org/wiki/Linear_co
 formule : x = (a * x + c) mod m
 Les paramètres sont :
 | Nom              | Valeur      |
-| ---------------- | ----------- |
+| ---------------- | ----------: |
 | modulo m         | 2^48        |
 | multiplicateur a | 25214903917 |
 | incrément c      | 11          |
@@ -42,7 +42,7 @@ build.py --langage=python --debug --nbop=10000000
 ## Résultat
 
 | Langage | Taille tableau | Durée compilation (en secondes) | Durée execution (en secondes) |
-| ------- | -------------- | ------------------------------- | ----------------------------- |
+| ------- | -------------: | ------------------------------: | ----------------------------: |
 | C       | 10000000       | 0.04                            | 3.49                          |
 | C++     | 10000000       | 1.36                            | 4.38                          |
 | Java    | 10000000       | 0.57                            | 5.14                          |
