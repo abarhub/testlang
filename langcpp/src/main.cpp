@@ -12,9 +12,9 @@ int randomNumber(int max)
     return tmp % max;
 }
 
-std::vector < int >* createArray(int len, int maxValue)
+std::vector<int> *createArray(int len, int maxValue)
 {
-    std::vector < int > *p_array = new vector<int>();
+    std::vector<int> *p_array = new vector<int>();
     for (int i = 0; i < len; i++)
     {
         p_array->push_back(randomNumber(maxValue));
@@ -29,7 +29,6 @@ int main(int argc, char *argv[])
 
     bool noOutput = false;
     bool debug = false;
-
 
     for (int i = 1; i < argc; i++)
     {
@@ -63,19 +62,21 @@ int main(int argc, char *argv[])
              << ";noOutput=" << noOutput << ";debug=" << debug << endl;
     }
 
-    std::vector < int > *arr = createArray(tabSize, maxValue);
+    std::vector<int> *arr = createArray(tabSize, maxValue);
 
     sort(arr->begin(), arr->end());
 
     if (!noOutput)
     {
         cout << "Array after sorting using "
-                "default sort is : "<<endl;
+                "default sort is : "
+             << endl;
         int i = 0;
-        for (auto it = arr->cbegin(); it != arr->cend()&&i < 10; ++it,i++){
+        for (auto it = arr->cbegin(); it != arr->cend() && i < 10; ++it, i++)
+        {
             cout << *it << " ";
         }
-        
+
         if (i < tabSize)
         {
             cout << "...";
