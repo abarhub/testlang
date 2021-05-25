@@ -42,14 +42,14 @@ int main(int argc, char *argv[])
 {
     int tabSize = 10000000;
     int maxValue = 5000000;
-    bool noOutput = 0;
-    bool debug = 0;
+    bool noOutput = false;
+    bool debug = false;
 
     for (int i = 1; i < argc; i++)
     {
         if (strcmp(argv[i], "--nooutput") == 0)
         {
-            noOutput = 1;
+            noOutput = true;
         }
         else if (prefix("--nbop=", argv[i]))
         {
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
         }
         else if (strcmp(argv[i], "--debug") == 0)
         {
-            debug = 1;
+            debug = true;
         }
     }
 

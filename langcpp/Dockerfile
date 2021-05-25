@@ -7,4 +7,4 @@ RUN apt-get update && apt-get install -y time python3
 #CMD time gcc -o myapp main.c  && time ./myapp
 #RUN apt-get update && apt-get install -y build-essential
 #CMD date && time g++ -o myapp main.cpp  && time ./myapp && date
-CMD date && python3 run.py && date
+CMD date && python3 run.py $OPTCMD && date

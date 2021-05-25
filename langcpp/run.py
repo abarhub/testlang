@@ -1,11 +1,13 @@
 import subprocess
 import sys
 
-gcc_result = subprocess.run(["time", "g++", "-o", "myapp", "main.cpp"])
+print("Build ...")
+gcc_result = subprocess.run(["time", "g++", "-o", "myapp", "main.cpp", "-Wall"])
 print("The exit code was: %d" % gcc_result.returncode)
 
+print("Run ...")
 list1 = ["time", "./myapp"]
-if sys.argv > 1:
+if len(sys.argv) > 1:
     list1 = list1 + sys.argv[1:]
 run_result = subprocess.run(list1)
 print("The exit code was: %d" % run_result.returncode)

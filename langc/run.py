@@ -1,8 +1,10 @@
 import subprocess, sys
 
-gcc_result = subprocess.run(["time", "gcc", "-o", "myapp", "main.c"])
+print("Build ...")
+gcc_result = subprocess.run(["time", "gcc", "-o", "myapp", "main.c", "-Wall"])
 print("The exit code was: %d" % gcc_result.returncode)
 
+print("Run ...")
 list1 = ["time", "./myapp"]
 if len(sys.argv) > 1:
     list1 = list1 + sys.argv[1:]

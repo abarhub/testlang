@@ -70,7 +70,7 @@ def main(argv):
                 param["debug"] = True
         build_run(param)
     except getopt.GetoptError:
-        print('test.py -i <inputfile> -o <outputfile>')
+        print('build.py -hland')
         sys.exit(2)
 
 

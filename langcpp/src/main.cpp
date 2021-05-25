@@ -20,12 +20,48 @@ int *createArray(int len, int maxValue)
     return p_array;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
-    const int tabSize = 10000000;
-    const int maxValue = 5000000;
+    int tabSize = 10000000;
+    int maxValue = 5000000;
 
-    int* arr = createArray(tabSize, maxValue);
+    bool noOutput = false;
+    bool debug = false;
+
+
+    for (int i = 1; i < argc; i++)
+    {
+        string arg(argv[i]);
+        if (arg == "--nooutput")
+        {
+            noOutput = true;
+        }
+        else if (arg.rfind("--nbop=", 0) == 0)
+        {
+            char *s = argv[i];
+            int nb = atoi(s + 7);
+            if (nb > 0)
+            {
+                tabSize = nb;
+            }
+        }
+        else if (arg == "--debug")
+        {
+            debug = true;
+        }
+    }
+
+    if (debug)
+    {
+        for (int i = 0; i < argc; i++)
+        {
+            cout << "   argv[" << i << "] : '" << argv[i] << "'" << endl;
+        }
+        cout << "lang=cpp;tabSize=" << tabSize << ";maxValue=" << maxValue
+             << ";noOutput=" << noOutput << ";debug=" << debug << endl;
+    }
+
+    int *arr = createArray(tabSize, maxValue);
     int n = tabSize / sizeof(arr[0]);
 
     /*Here we take two parameters, the beginning of the
@@ -33,18 +69,21 @@ int main()
     be sorted*/
     sort(arr, arr + n);
 
-    cout << "\nArray after sorting using "
-            "default sort is : \n";
-    int i = 0;
-    for (i = 0; i < n && i < 10; ++i)
+    if (!noOutput)
     {
-        cout << arr[i] << " ";
+        cout << "\nArray after sorting using "
+                "default sort is : \n";
+        int i = 0;
+        for (i = 0; i < n && i < 10; ++i)
+        {
+            cout << arr[i] << " ";
+        }
+        if (i < n)
+        {
+            cout << "...";
+        }
+        cout << "\n";
     }
-    if (i < n)
-    {
-        cout << "...";
-    }
-    cout << "\n";
 
     delete arr;
 

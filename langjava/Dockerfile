@@ -9,4 +9,4 @@ RUN apt-get update && apt-get install -y time python3
 #CMD date && g++ -o myapp main.cpp  && ./myapp && echo && date
 #RUN javac Main.java
 #CMD date +"%T.%N" && time javac Main.java && time java Main && echo && date +"%T.%N"
-CMD date +"%T.%N" && python3 run.py && date +"%T.%N"
+CMD date +"%T.%N" && python3 run.py $OPTCMD && date +"%T.%N"
