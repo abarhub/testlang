@@ -10,7 +10,7 @@ Les paramètres sont :
 | Nom              | Valeur      |
 | ---------------- | ----------: |
 | modulo m         | 2^48        |
-| multiplicateur a | 25214903917 |
+| multiplicateur a | 25 214 903 917 |
 | incrément c      | 11          |
 
 ## C
@@ -43,11 +43,11 @@ build.py --langage=python --debug --nbop=10000000
 
 | Langage | Taille tableau | Durée compilation (en secondes) | Durée execution (en secondes) |
 | ------- | -------------: | ------------------------------: | ----------------------------: |
-| C       | 10000000       | 0.04                            | 3.49                          |
-| C++     | 10000000       | 1.36                            | 4.38                          |
-| Java    | 10000000       | 0.57                            | 5.14                          |
-| Python  | 10000000       | 0.0                             | 9.09                          |
-| Go      | 10000000       | 0.19                            | 2.13                          |
+| C       | 10 000 000       | 0.04                            | 3.49                          |
+| C++     | 10 000 000       | 1.36                            | 4.38                          |
+| Java    | 10 000 000       | 0.57                            | 5.14                          |
+| Python  | 10 000 000       | 0.00                            | 9.09                          |
+| Go      | 10 000 000       | 0.19                            | 2.13                          |
 
 Go est le plus rapide en execution, et Python est le plus lent.
 C++ est le plus long en compilation.
