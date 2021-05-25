@@ -30,6 +30,9 @@ Le trie est fait sur une liste.
 Le trie est fait avec la methode sort de la liste.
 Il n'y a pas de compilation en Python.
 
+## Go
+Le trie est fait sur une liste, avec la methode sort.
+
 ## Build
 Pour builder, en Python, en mode debug, pour le trie d'un tableau de 10000000 éléments, il faut executer la commande :
 ```bash
@@ -44,7 +47,8 @@ build.py --langage=python --debug --nbop=10000000
 | C++     | 10000000       | 1.36                            | 4.38                          |
 | Java    | 10000000       | 0.57                            | 5.14                          |
 | Python  | 10000000       | 0.0                             | 9.09                          |
+| Go      | 10000000       | 0.19                            | 2.13                          |
 
-C est le plus rapide en execution, et Python est le plus lent.
+Go est le plus rapide en execution, et Python est le plus lent.
 C++ est le plus long en compilation.
 
