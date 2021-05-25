@@ -37,6 +37,9 @@ def build_run(param):
     elif param["langage"] == 'java':
         os.chdir("langjava")
         execute("sort-test-java-app", "sort-test-java-app-run", param)
+    elif param["langage"] == 'python':
+        os.chdir("langpython")
+        execute("sort-test-python-app", "sort-test-python-app-run", param)
 
     else:
         raise Exception("Erreur : langage inconnu : " + param)
