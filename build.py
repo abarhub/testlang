@@ -4,8 +4,13 @@ import getopt
 import os
 
 
-def execute(nom_image, nom_conteneur,rep,build_cmd,run_cmd, param):
-
+def execute(parametres):
+    nom_image=parametres["nom_image"]
+    nom_conteneur=parametres["nom_contenaire"]
+    rep=parametres["repertoire"]
+    build_cmd=parametres["build_cmd"]
+    run_cmd=parametres["run_cmd"]
+    param=parametres["param"]
     print("suppression de l'image si elle existe deja ...")
     list_files = subprocess.run(["docker", "image", "rm", nom_image])
     print("The exit code was: %d" % list_files.returncode)
@@ -31,23 +36,65 @@ def execute(nom_image, nom_conteneur,rep,build_cmd,run_cmd, param):
     print("The exit code was: %d" % list_files.returncode)
 
 
-def build_run(param):
+def create_param( param):
     if param["langage"] == 'c':
-        #os.chdir("langc")
-        execute("sort-test-c-app", "sort-test-c-app-run","langc","time, gcc, -o, myapp, main.c, -Wall","time, ./myapp", param)
+        thisdict = {
+            "nom_image": "sort-test-c-app",
+            "nom_contenaire": "sort-test-c-app-run",
+            "repertoire": "langc",
+            "build_cmd": "time, gcc, -o, myapp, main.c, -Wall",
+            "run_cmd": "time, ./myapp",
+            "param": param
+        }
+        return thisdict;
     elif param["langage"] == 'cpp':
-        #os.chdir("langcpp")
-        execute("sort-test-cpp-app", "sort-test-cpp-app-run","langcpp","time, g++, -o, myapp, main.cpp, -Wall", "time, ./myapp", param)
+        thisdict = {
+            "nom_image": "sort-test-cpp-app",
+            "nom_contenaire": "sort-test-cpp-app-run",
+            "repertoire": "langcpp",
+            "build_cmd": "time, g++, -o, myapp, main.cpp, -Wall",
+            "run_cmd": "time, ./myapp",
+            "param": param
+        }
+        return thisdict;
     elif param["langage"] == 'java':
-        #os.chdir("langjava")
-        execute("sort-test-java-app", "sort-test-java-app-run","langjava","time, javac, Main.java","time, java, Main", param)
+        thisdict = {
+            "nom_image": "sort-test-java-app",
+            "nom_contenaire": "sort-test-java-app-run",
+            "repertoire": "langjava",
+            "build_cmd": "time, javac, Main.java",
+            "run_cmd": "time, java, Main",
+            "param": param
+        }
+        return thisdict;
     elif param["langage"] == 'python':
-        #os.chdir("langpython")
-        execute("sort-test-python-app", "sort-test-python-app-run","langpython","","time, python3, main.py", param)
+        thisdict = {
+            "nom_image": "sort-test-python-app",
+            "nom_contenaire": "sort-test-python-app-run",
+            "repertoire": "langpython",
+            "build_cmd": "",
+            "run_cmd": "time, python3, main.py",
+            "param": param
+        }
+        return thisdict;
     elif param["langage"] == 'go':
-        #os.chdir("langgo")
-        execute("sort-test-go-app", "sort-test-go-app-run","langgo","time, go, build, main.go", "time, ./main", param)
+        thisdict = {
+            "nom_image": "sort-test-go-app",
+            "nom_contenaire": "sort-test-go-app-run",
+            "repertoire": "langgo",
+            "build_cmd": "time, go, build, main.go",
+            "run_cmd": "time, ./main",
+            "param": param
+        }
+        return thisdict;
+    else:
+        raise Exception("Erreur : langage inconnu : " + param)
 
+
+def build_run(param):
+    parametre_execution=create_param(param)
+    if parametre_execution!=None:
+        execute(parametre_execution)    
     else:
         raise Exception("Erreur : langage inconnu : " + param)
 
