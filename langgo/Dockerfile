@@ -1,5 +1,5 @@
 FROM golang:1.16.4-buster
-COPY ./src /usr/src/myapp
+COPY langgo/src /usr/src/myapp
 COPY ./run.py /usr/src/myapp
 WORKDIR /usr/src/myapp
 #RUN gcc -o myapp main.c

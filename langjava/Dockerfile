@@ -1,5 +1,5 @@
 FROM openjdk:11.0-slim-buster
-COPY ./src /usr/src/myapp
+COPY langjava/src /usr/src/myapp
 COPY ./run.py /usr/src/myapp
 WORKDIR /usr/src/myapp
 #RUN gcc -o myapp main.c

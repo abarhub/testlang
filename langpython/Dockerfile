@@ -1,5 +1,5 @@
 FROM python:3.9-slim-buster
-COPY ./src /usr/src/myapp
+COPY langpython/src /usr/src/myapp
 COPY ./run.py /usr/src/myapp
 WORKDIR /usr/src/myapp
 #RUN gcc -o myapp main.c
