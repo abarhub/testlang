@@ -87,6 +87,16 @@ def create_param( param):
             "param": param
         }
         return thisdict;
+    elif param["langage"] == 'js':
+        thisdict = {
+            "nom_image": "sort-test-js-app",
+            "nom_contenaire": "sort-test-js-app-run",
+            "repertoire": "langjs",
+            "build_cmd": "",
+            "run_cmd": "time, node, main.js",
+            "param": param
+        }
+        return thisdict;
     else:
         raise Exception("Erreur : langage inconnu : " + param)
 
