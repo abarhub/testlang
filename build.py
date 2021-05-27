@@ -97,6 +97,16 @@ def create_param( param):
             "param": param
         }
         return thisdict;
+    elif param["langage"] == 'rust':
+        thisdict = {
+            "nom_image": "sort-test-rust-app",
+            "nom_contenaire": "sort-test-rust-app-run",
+            "repertoire": "langrust",
+            "build_cmd": "time, rustc, main.rs",
+            "run_cmd": "time, ./main",
+            "param": param
+        }
+        return thisdict;
     else:
         raise Exception("Erreur : langage inconnu : " + param)
 
