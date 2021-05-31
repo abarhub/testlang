@@ -41,13 +41,15 @@ build.py --langage=python --debug --nbop=10000000
 
 ## Résultat
 
-| Langage | Taille tableau | Durée compilation (en secondes) | Durée execution (en secondes) |
-| ------- | -------------: | ------------------------------: | ----------------------------: |
-| C       | 10 000 000       | 0.04                            | 3.49                          |
-| C++     | 10 000 000       | 1.36                            | 4.38                          |
-| Java    | 10 000 000       | 0.57                            | 5.14                          |
-| Python  | 10 000 000       | 0.00                            | 9.09                          |
-| Go      | 10 000 000       | 0.19                            | 2.13                          |
+| Langage     | Taille tableau   | Durée compilation (en secondes) | Durée execution (en secondes) |
+| ----------- | ---------------: | ------------------------------: | ----------------------------: |
+| C           | 10 000 000       | 0.04                            | 3.49                          |
+| C++         | 10 000 000       | 1.36                            | 4.38                          |
+| Java        | 10 000 000       | 0.57                            | 5.14                          |
+| Python      | 10 000 000       | 0.00                            | 9.09                          |
+| Go          | 10 000 000       | 0.19                            | 2.13                          |
+| Javascript  | 10 000 000       | 0.00                            | 16.11                         |
+| Rust        | 10 000 000       | 0.77                            | 8.37                          |
 
 Go est le plus rapide en execution, et Python est le plus lent.
 C++ est le plus long en compilation.

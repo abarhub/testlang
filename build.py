@@ -5,20 +5,21 @@ import os
 
 
 def execute(parametres):
-    nom_image=parametres["nom_image"]
-    nom_conteneur=parametres["nom_contenaire"]
-    rep=parametres["repertoire"]
-    build_cmd=parametres["build_cmd"]
-    run_cmd=parametres["run_cmd"]
-    param=parametres["param"]
-    print("suppression de l'image si elle existe deja ...")
-    list_files = subprocess.run(["docker", "image", "rm", nom_image])
-    print("The exit code was: %d" % list_files.returncode)
+    nom_image = parametres["nom_image"]
+    nom_conteneur = parametres["nom_contenaire"]
+    rep = parametres["repertoire"]
+    build_cmd = parametres["build_cmd"]
+    run_cmd = parametres["run_cmd"]
+    param = parametres["param"]
+    if param["norebuild"] == False:
+        print("suppression de l'image si elle existe deja ...")
+        list_files = subprocess.run(["docker", "image", "rm", nom_image])
+        print("The exit code was: %d" % list_files.returncode)
 
-    print("build ...")
-    list_files = subprocess.run(["docker", "build", "-t", nom_image,                
-                "-f",rep+"/Dockerfile", "."])
-    print("The exit code was: %d" % list_files.returncode)
+        print("build ...")
+        list_files = subprocess.run(["docker", "build", "-t", nom_image,
+                                    "-f", rep+"/Dockerfile", "."])
+        print("The exit code was: %d" % list_files.returncode)
 
     print("run ...")
     opt = ""
@@ -30,13 +31,13 @@ def execute(parametres):
     list_files = subprocess.run(
         ["docker", "run", "-it", "--rm",
          "-e", "OPTCMD="+opt,
-         "-e","BUILD_CMD="+build_cmd,
-         "-e","RUN_CMD="+run_cmd,
+         "-e", "BUILD_CMD="+build_cmd,
+         "-e", "RUN_CMD="+run_cmd,
          "--name", nom_conteneur, nom_image])
     print("The exit code was: %d" % list_files.returncode)
 
 
-def create_param( param):
+def create_param(param):
     if param["langage"] == 'c':
         thisdict = {
             "nom_image": "sort-test-c-app",
@@ -46,7 +47,7 @@ def create_param( param):
             "run_cmd": "time, ./myapp",
             "param": param
         }
-        return thisdict;
+        return thisdict
     elif param["langage"] == 'cpp':
         thisdict = {
             "nom_image": "sort-test-cpp-app",
@@ -56,7 +57,7 @@ def create_param( param):
             "run_cmd": "time, ./myapp",
             "param": param
         }
-        return thisdict;
+        return thisdict
     elif param["langage"] == 'java':
         thisdict = {
             "nom_image": "sort-test-java-app",
@@ -66,7 +67,7 @@ def create_param( param):
             "run_cmd": "time, java, Main",
             "param": param
         }
-        return thisdict;
+        return thisdict
     elif param["langage"] == 'python':
         thisdict = {
             "nom_image": "sort-test-python-app",
@@ -76,7 +77,7 @@ def create_param( param):
             "run_cmd": "time, python3, main.py",
             "param": param
         }
-        return thisdict;
+        return thisdict
     elif param["langage"] == 'go':
         thisdict = {
             "nom_image": "sort-test-go-app",
@@ -86,7 +87,7 @@ def create_param( param):
             "run_cmd": "time, ./main",
             "param": param
         }
-        return thisdict;
+        return thisdict
     elif param["langage"] == 'js':
         thisdict = {
             "nom_image": "sort-test-js-app",
@@ -96,7 +97,7 @@ def create_param( param):
             "run_cmd": "time, node, main.js",
             "param": param
         }
-        return thisdict;
+        return thisdict
     elif param["langage"] == 'rust':
         thisdict = {
             "nom_image": "sort-test-rust-app",
@@ -106,15 +107,15 @@ def create_param( param):
             "run_cmd": "time, ./main",
             "param": param
         }
-        return thisdict;
+        return thisdict
     else:
         raise Exception("Erreur : langage inconnu : " + param)
 
 
 def build_run(param):
-    parametre_execution=create_param(param)
-    if parametre_execution!=None:
-        execute(parametre_execution)    
+    parametre_execution = create_param(param)
+    if parametre_execution != None:
+        execute(parametre_execution)
     else:
         raise Exception("Erreur : langage inconnu : " + param)
 
@@ -122,12 +123,13 @@ def build_run(param):
 def main(argv):
     try:
         opts, args = getopt.getopt(
-            argv, "hl:a:n:d", ["langage=", "action=", "nbop=", "debug"])
+            argv, "hl:a:n:d", ["langage=", "action=", "nbop=", "debug", "norebuild"])
         param = {
             "langage": "c",
             "action": "sort",
             "nb_operation": "100",
-            "debug": False
+            "debug": False,
+            "norebuild": False
         }
 
         for opt, arg in opts:
@@ -136,15 +138,14 @@ def main(argv):
                 sys.exit()
             elif opt in ("-l", "--langage"):
                 param["langage"] = arg
-                langage = arg
             elif opt in ("-a", "--action"):
                 param["action"] = arg
-                action = arg
             elif opt in ("-n", "--nbop"):
                 param["nb_operation"] = arg
-                nb_operation = arg
             elif opt in ("-d", "--debug"):
                 param["debug"] = True
+            elif opt in ("--norebuild"):
+                param["norebuild"] = True
         build_run(param)
     except getopt.GetoptError:
         print('build.py -hland')
