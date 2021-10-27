@@ -108,6 +108,17 @@ def create_param(param):
             "param": param
         }
         return thisdict
+    elif param["langage"] == 'asm':
+        thisdict = {
+            "nom_image": "sort-test-asm-app",
+            "nom_contenaire": "sort-test-asm-app-run",
+            "repertoire": "langasm",
+            "build_cmd": "nasm, -f, elf64, -o, main.o, main.asm, &&, ld, -o, main, main.o",
+            #"build_cmd": "nasm, -f, elf64, -o, main.o, main.asm",
+            "run_cmd": "time, ./main",
+            "param": param
+        }
+        return thisdict
     else:
         raise Exception("Erreur : langage inconnu : " + param)
 
